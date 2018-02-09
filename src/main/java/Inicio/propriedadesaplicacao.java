@@ -6,17 +6,25 @@ import io.appium.java_client.remote.MobilePlatform;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.junit.Test;
 import junit.framework.Assert;
+import io.appium.java_client.android.*;
+
 
 public class propriedadesaplicacao {
 
 	@Test
 	public void cenario01() throws MalformedURLException, InterruptedException {
 		
+		/*=====================================================*/
+		/*=1ª=Parte=do=código=para=identificação=do=Capability=*/
+		/*=====================================================*/
 		/*Inicio da Instancia para declarar as variaveis do sistema e aplicativo para testes*/
 		DesiredCapabilities capacidade = new DesiredCapabilities();
 		
@@ -37,65 +45,93 @@ public class propriedadesaplicacao {
 		
 		/*Instacia o driver de conexão e inicio do aplicativo*/
 		AndroidDriver driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capacidade);
-				/*Teste abrindo o Whatsapp*/
-				/*capacidade.setCapability("appPackage", "com.whatsapp");
-				capacidade.setCapability("appActivity", "com.whatsapp.Main");*/
-				
+		
+		/*=============================================================*/
+		/*=2ª=Parte=do=código=para=preencher=os=campos=de=Equipamentos=*/
+		/*=============================================================*/
 		/*Aguardar a tela carregar para clicar*/
 		Thread.sleep(20000);
 				
 		/*Clicar no botão iniciar do IPMAgro*/
 		driver.findElement(By.xpath("//android.widget.ImageView[@bounds = '[213,858][327,960]']")).click();
 		Thread.sleep(5000);
+
+		
+  	    /*Identificar a quantidade de valores no ListView de Categoria*/
 		
 		/*Preencher o campo de Categoria*/
 		driver.findElement(By.xpath("//android.widget.EditText[@bounds = '[24,169][516,237]']")).click();
 		Thread.sleep(5000);
-		driver.findElement(By.xpath("//android.widget.TextView[@text = 'TRATOR']")).click();
-		Thread.sleep(5000);
+		 
+		 
+		 List <WebElement> categoria = driver.findElementsByXPath("//android.widget.ListView[@resource-id='android:id/select_dialog_listview']/android.widget.TextView");
+		 
+		 
+		 int size = categoria.size();		 
+		 for (int i  = 0; i < size; i++) {
+
+        	 String tipocategoria = categoria.get(i).getText();
+        	 System.out.println(i + "-" + tipocategoria);
+		 }
+		 
+
+		/*Repetir a instrução de preencher Equipamentos Agricos 10 vezes*/
+//		int contador = 1;
+//				while (contador < 10) {
+//					/*Preencher o campo de Categoria*/
+//					driver.findElement(By.xpath("//android.widget.EditText[@bounds = '[24,169][516,237]']")).click();
+//					Thread.sleep(5000);
+//					driver.findElement(By.xpath("//android.widget.TextView[@text = 'TRATOR']")).click();
+//					Thread.sleep(5000);
+//					
+//					/*Preencher o campo de Marca*/
+//					driver.findElement(By.xpath("//android.widget.EditText[@bounds = '[24,277][516,345]']")).click();
+//					Thread.sleep(5000);
+//					driver.findElement(By.xpath("//android.widget.TextView[@text = 'AGRALE']")).click();
+//					Thread.sleep(5000);
+//					
+//					/*Preencher o campo de Modelo*/
+//					driver.findElement(By.xpath("//android.widget.EditText[@bounds = '[24,385][516,453]']")).click();
+//					Thread.sleep(5000);
+//					driver.findElement(By.xpath("//android.widget.TextView[@text = '4100 4X2']")).click();
+//					Thread.sleep(5000);
+//					
+//					/*Preencher o campo de Ano*/
+//					driver.findElement(By.xpath("//android.widget.EditText[@bounds = '[24,493][516,561]']")).click();
+//					Thread.sleep(5000);
+//					driver.findElement(By.xpath("//android.widget.TextView[@text = '2016']")).click();
+//					Thread.sleep(5000);
+//					
+//					/*Preencher o campo de UF*/
+//					driver.findElement(By.xpath("//android.widget.EditText[@bounds = '[24,601][516,669]']")).click();
+//					Thread.sleep(5000);
+//					driver.findElement(By.xpath("//android.widget.TextView[@text = 'ACRE']")).click();
+//					Thread.sleep(5000);
+//					
+//					++contador;
+//					
+//				}
+					
 		
-		/*Preencher o campo de Marca*/
-		driver.findElement(By.xpath("//android.widget.EditText[@bounds = '[24,277][516,345]']")).click();
-		Thread.sleep(5000);
-		driver.findElement(By.xpath("//android.widget.TextView[@text = 'AGRALE']")).click();
-		Thread.sleep(5000);
-		
-		/*Preencher o campo de Modelo*/
-		driver.findElement(By.xpath("//android.widget.EditText[@bounds = '[24,385][516,453]']")).click();
-		Thread.sleep(5000);
-		driver.findElement(By.xpath("//android.widget.TextView[@text = '4100 4X2']")).click();
-		Thread.sleep(5000);
-		
-		/*Preencher o campo de Ano*/
-		driver.findElement(By.xpath("//android.widget.EditText[@bounds = '[24,493][516,561]']")).click();
-		Thread.sleep(5000);
-		driver.findElement(By.xpath("//android.widget.TextView[@text = '2016']")).click();
-		Thread.sleep(5000);
-		
-		/*Preencher o campo de UF*/
-		driver.findElement(By.xpath("//android.widget.EditText[@bounds = '[24,601][516,669]']")).click();
-		Thread.sleep(5000);
-		driver.findElement(By.xpath("//android.widget.TextView[@text = 'ACRE']")).click();
-		Thread.sleep(5000);
-		
-		
-		/*Clicar no botão iniciar de buscar*/
-		driver.findElement(By.xpath("//android.widget.Button[@bounds = '[24,684][516,756]']")).click();
-		Thread.sleep(10000);
-		
-		String ValorEquipamento = driver.findElement(By.xpath("//android.widget.TextView[@bounds = '[18,677][266,721]']")).getText();
-		
-		System.out.println(ValorEquipamento);
-		
-		/*-driver.findElement(By.id("")).sendKeys("3");
-		driver.findElement(By.id("br.com.libertyseguros.mobile.corretor:id/btnLogin")).click();
-		driver.findElement(By.id("br.com.libertyseguros.mobile.corretor:id/editUsuarioLogin")).sendKeys("renevj");
-		driver.findElement(By.id("br.com.libertyseguros.mobile.corretor:id/editSenhaLogin")).sendKeys("Li1234!@");
-		driver.findElement(By.id("br.com.libertyseguros.mobile.corretor:id/btnLogin")).click();
-		Assert.assertEquals("O triângulo é Equilátero", driver.findElement(By.id("com.eliasnogueira.trianguloapp:id/txtResultado")).getText());*/
+//		/*Clicar no botão iniciar de buscar*/
+//		driver.findElement(By.xpath("//android.widget.Button[@bounds = '[24,684][516,756]']")).click();
+//		Thread.sleep(10000);
+//		
+//		
+//		/*Guardar o valor do equipamento*/
+//		String ValorEquipamento; 
+//		ValorEquipamento = driver.findElement(By.xpath("//android.widget.TextView[@bounds = '[18,677][266,721]']")).getText();
+//		System.out.println(ValorEquipamento);
+//		
+//		
+//		/*Clicar no botão voltar, para escolher outro equipamento*/
+//		driver.findElement(By.xpath("//android.widget.Button[@bounds = '[0,36][69,120]']")).click();
+//		Thread.sleep(10000);
+//		
+	
+	System.out.println("Codigo Finalizado");
 		
 	}
-	
 	
 	
 }
