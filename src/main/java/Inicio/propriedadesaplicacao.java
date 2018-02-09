@@ -14,13 +14,20 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.junit.Test;
 import junit.framework.Assert;
-import io.appium.java_client.android.*;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.JavascriptExecutor;
+
+import io.appium.java_client.MobileBy;
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.AndroidElement;
+import static junit.framework.Assert.assertNotNull;
 
 
 public class propriedadesaplicacao {
 
 	@Test
-	public void cenario01() throws MalformedURLException, InterruptedException {
+	public void cenario01() throws Exception {
 		
 		/*=====================================================*/
 		/*=1ª=Parte=do=código=para=identificação=do=Capability=*/
@@ -57,60 +64,81 @@ public class propriedadesaplicacao {
 		Thread.sleep(5000);
 
 		
-  	    /*Identificar a quantidade de valores no ListView de Categoria*/
-		
+//  	    /*Identificar a quantidade de valores no ListView de Categoria*/
+//		
+//		/*Preencher o campo de Categoria*/
+//		driver.findElement(By.xpath("//android.widget.EditText[@bounds = '[24,169][516,237]']")).click();
+//		Thread.sleep(5000);
+//		 
+//		 List <WebElement> categoria = driver.findElementsByXPath("//android.widget.ListView[@resource-id='android:id/select_dialog_listview']/android.widget.TextView");
+//		 		 
+//		 int size = categoria.size();		 
+//			 for (int i  = 0; i < size; i++) {
+//	
+//	        	 String tipocategoria = categoria.get(i).getText();
+//	        	 System.out.println(i + "-" + tipocategoria);
+//			 }
+		 
+
 		/*Preencher o campo de Categoria*/
 		driver.findElement(By.xpath("//android.widget.EditText[@bounds = '[24,169][516,237]']")).click();
 		Thread.sleep(5000);
-		 
-		 
-		 List <WebElement> categoria = driver.findElementsByXPath("//android.widget.ListView[@resource-id='android:id/select_dialog_listview']/android.widget.TextView");
-		 
-		 
-		 int size = categoria.size();		 
-		 for (int i  = 0; i < size; i++) {
+		driver.findElement(By.xpath("//android.widget.TextView[@text = 'TRATOR']")).click();
+		Thread.sleep(5000);
+		
+		/*Preencher o campo de Marca*/
+		driver.findElement(By.xpath("//android.widget.EditText[@bounds = '[24,277][516,345]']")).click();
+		Thread.sleep(5000);
+		driver.findElement(By.xpath("//android.widget.TextView[@text = 'AGRALE']")).click();
+		Thread.sleep(5000);
+		
+		/*Preencher o campo de Modelo*/
+		driver.findElement(By.xpath("//android.widget.EditText[@bounds = '[24,385][516,453]']")).click();
+		Thread.sleep(5000);
+		driver.findElement(By.xpath("//android.widget.TextView[@text = '4100 4X2']")).click();
+		Thread.sleep(5000);
+		
+		/*Preencher o campo de Ano*/
+		driver.findElement(By.xpath("//android.widget.EditText[@bounds = '[24,493][516,561]']")).click();
+		Thread.sleep(5000);
+		driver.findElement(By.xpath("//android.widget.TextView[@text = '2016']")).click();
+		Thread.sleep(5000);
+		
+		/*Preencher o campo de UF*/
+		driver.findElement(By.xpath("//android.widget.EditText[@bounds = '[24,601][516,669]']")).click();
+		Thread.sleep(5000);
+//		driver.findElement(By.xpath("//android.widget.TextView[@text = 'ACRE']")).click();
+//		Thread.sleep(5000);
+		
+		
+		/*Rolar a tela para baixo*/
 
-        	 String tipocategoria = categoria.get(i).getText();
-        	 System.out.println(i + "-" + tipocategoria);
-		 }
-		 
-
-		/*Repetir a instrução de preencher Equipamentos Agricos 10 vezes*/
-//		int contador = 1;
-//				while (contador < 10) {
-//					/*Preencher o campo de Categoria*/
-//					driver.findElement(By.xpath("//android.widget.EditText[@bounds = '[24,169][516,237]']")).click();
-//					Thread.sleep(5000);
-//					driver.findElement(By.xpath("//android.widget.TextView[@text = 'TRATOR']")).click();
-//					Thread.sleep(5000);
-//					
-//					/*Preencher o campo de Marca*/
-//					driver.findElement(By.xpath("//android.widget.EditText[@bounds = '[24,277][516,345]']")).click();
-//					Thread.sleep(5000);
-//					driver.findElement(By.xpath("//android.widget.TextView[@text = 'AGRALE']")).click();
-//					Thread.sleep(5000);
-//					
-//					/*Preencher o campo de Modelo*/
-//					driver.findElement(By.xpath("//android.widget.EditText[@bounds = '[24,385][516,453]']")).click();
-//					Thread.sleep(5000);
-//					driver.findElement(By.xpath("//android.widget.TextView[@text = '4100 4X2']")).click();
-//					Thread.sleep(5000);
-//					
-//					/*Preencher o campo de Ano*/
-//					driver.findElement(By.xpath("//android.widget.EditText[@bounds = '[24,493][516,561]']")).click();
-//					Thread.sleep(5000);
-//					driver.findElement(By.xpath("//android.widget.TextView[@text = '2016']")).click();
-//					Thread.sleep(5000);
-//					
-//					/*Preencher o campo de UF*/
-//					driver.findElement(By.xpath("//android.widget.EditText[@bounds = '[24,601][516,669]']")).click();
-//					Thread.sleep(5000);
-//					driver.findElement(By.xpath("//android.widget.TextView[@text = 'ACRE']")).click();
-//					Thread.sleep(5000);
-//					
-//					++contador;
-//					
-//				}
+		Dimension dimensao = driver.manage().window().getSize();
+		System.out.println(dimensao); 
+		
+		int starty = (int) (dimensao.height * 0.80); 
+		System.out.println(starty); 
+				
+		int endy = (int) (dimensao.height * 0.06);
+		System.out.println(endy);
+		
+		int startx = dimensao.width / 2; 
+		System.out.println(startx);
+		
+		
+		//Swipe from Bottom to Top. 
+		driver.swipe(startx, starty, startx, endy, 3000); 
+		
+		
+		/*Listar os valores exibidos*/				
+		List <WebElement> uf = driver.findElementsByXPath("//android.widget.ListView[@resource-id='android:id/select_dialog_listview']/android.widget.TextView");
+		 		 
+		 int size = uf.size();		 
+			 for (int i  = 0; i < size; i++) {
+	
+	        	 String tipouf = uf.get(i).getText();
+	        	 System.out.println(i + "-" + tipouf);
+			 }
 					
 		
 //		/*Clicar no botão iniciar de buscar*/
@@ -132,6 +160,10 @@ public class propriedadesaplicacao {
 	System.out.println("Codigo Finalizado");
 		
 	}
+	
+	
+
+	
 	
 	
 }
