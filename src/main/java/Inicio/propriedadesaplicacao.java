@@ -15,7 +15,8 @@ import io.appium.java_client.android.AndroidDriver;
 public class propriedadesaplicacao {
 
 	@Test
-	public void cenario01() throws Exception {
+	public void cenario01() throws Exception 
+	{
 		
 		/*=====================================================*/
 		/*=1ª=Parte=do=código=para=identificação=do=Capability=*/
@@ -69,107 +70,206 @@ public class propriedadesaplicacao {
 		driver.findElement(By.xpath("//android.widget.TextView[@text = '4100 4X2']")).click();
 		Thread.sleep(5000);
 		
-		/*Preencher o campo de Ano*/
+		
+		//****************************************************************************//
+		//********************Preencher*Ano*Equipamento*******************************//
+		//****************************************************************************//
 		driver.findElement(By.xpath("//android.widget.EditText[@bounds = '[24,493][516,561]']")).click();
 		Thread.sleep(5000);
-		driver.findElement(By.xpath("//android.widget.TextView[@text = '2016']")).click();
-		Thread.sleep(5000);
+
 		
-		/*Preencher o campo de UF*/
-		driver.findElement(By.xpath("//android.widget.EditText[@bounds = '[24,601][516,669]']")).click();
-		Thread.sleep(5000);
-		
-		//*************************************************//
-		//***************Rolar*a*tela*3*vezes**************//
-		//*************************************************//
-		for (int rolartela = 0; rolartela < 3; rolartela++) 
+		//***************Rolar*a*tela*2*vezes**************//
+		for (int anorolartela = 0; anorolartela < 2; anorolartela++) 
 		{
 			 
 			 //**********************************************//
-			 //Se for a primeira vez da tela não rolar a tela//
+			 //Se*for*a*primeira*vez*da*tela*não*rolar*a*tela//
 			 //**********************************************//
-			 if (rolartela> 0)
+			 if (anorolartela> 0)
 			 {
 			    //Rolar a tela para baixo//
-				Dimension dimensao = driver.manage().window().getSize();
+				Dimension anodimensao = driver.manage().window().getSize();
 					
 				//Esquerda superior, lugar inicial da tela//
-				int starty = (int) (dimensao.height * 0.80); 
+				int anostarty = (int) (anodimensao.height * 0.80); 
 								
 				//espaço que será percorrido//
-				int endy = (int) (dimensao.height * 0.06);
+				int anoendy = (int) (anodimensao.height * 0.06);
 						
 				//meio da tela//
-				int startx = dimensao.width / 2; 
+				int anostartx = anodimensao.width / 2; 
 				
 				
 				//**********************************************//
 				//Rolar*a*tela*conforme*quantidade*de*repetições//
 				//**********************************************//
-				for (int rolartotal = 1; rolartotal <= rolartela ;rolartotal++)
+				for (int anorolartotal = 1; anorolartotal <= anorolartela ;anorolartotal++)
 				{
-					driver.swipe(startx, starty, startx, endy, 3000);
+					driver.swipe(anostartx, anostarty, anostartx, anoendy, 3000);
 					Thread.sleep(5000);
 				}
 			 }
 
-			 
 			 //**********************************************//
 			 //******Criar*as*listas*de*valores*da*tela******//
 			 //**********************************************//
-			 List <WebElement> uf = driver.findElementsByXPath("//android.widget.ListView[@resource-id='android:id/select_dialog_listview']/android.widget.TextView");
-			 ArrayList<String> uftotal = new ArrayList();				 
+			 List <WebElement> ano = driver.findElementsByXPath("//android.widget.ListView[@resource-id='android:id/select_dialog_listview']/android.widget.TextView");
+			 ArrayList<String> anototal = new ArrayList();				 
 			 
 			 //**********************************************//
 			 //Verificar*o*tamanho*da*lista*e*incluir*valores//
 			 //**********************************************//
-			 int size = uf.size();		 
-			 for (int i  = 0; i < size; i++) 
+			 int anosize = ano.size();		 
+			 for (int anoi  = 0; anoi < anosize; anoi++) 
 			 { 
-				 String tipouf = uf.get(i).getText();
-				 uftotal.add(tipouf);					 
+				 String anotipo = ano.get(anoi).getText();
+				 anototal.add(anotipo);					 
 			 }
 			 
 			 //**********************************************************//
 			 //Seleciona*um*valor*da*lista,*até*acabar*os*valores*da*tela//
 			 //**********************************************************//
-			 for (int selecionar  = 0; selecionar < uftotal.size(); selecionar++) 
+			 for (int anoselecionar  = 0; anoselecionar < anototal.size(); anoselecionar++) 
 			 { 
-				 driver.findElement(By.xpath("//android.widget.TextView[@text = '"+ uftotal.get(selecionar) +"']")).click();
+				 driver.findElement(By.xpath("//android.widget.TextView[@text = '"+ anototal.get(anoselecionar) +"']")).click();
 				 Thread.sleep(5000);
-				 driver.findElement(By.xpath("//android.widget.EditText[@bounds = '[24,601][516,669]']")).click();
-				 Thread.sleep(10000);
-				 System.out.println(selecionar+"-"+uftotal.get(selecionar));
-					 
+
+				 	////////////////////////////////////////////////////////////////////////////////
+				    ////////////////////////////////////////////////////////////////////////////////
+					//****************************************************************************//
+					//********************Preencher*UF********************************************//
+					//****************************************************************************//
+					driver.findElement(By.xpath("//android.widget.EditText[@bounds = '[24,601][516,669]']")).click();
+					Thread.sleep(5000);
+					
+					//***************Rolar*a*tela*3*vezes**************//
+					for (int ufrolartela = 0; ufrolartela < 3; ufrolartela++) 
+					{
+						 
+						 //**********************************************//
+						 //Se*for*a*primeira*vez*da*tela*não*rolar*a*tela//
+						 //**********************************************//
+						 if (ufrolartela> 0)
+						 {
+						    //Rolar a tela para baixo//
+							Dimension ufdimensao = driver.manage().window().getSize();
+								
+							//Esquerda superior, lugar inicial da tela//
+							int ufstarty = (int) (ufdimensao.height * 0.80); 
+											
+							//espaço que será percorrido//
+							int ufendy = (int) (ufdimensao.height * 0.06);
+									
+							//meio da tela//
+							int ufstartx = ufdimensao.width / 2; 
+							
+							
+							//**********************************************//
+							//Rolar*a*tela*conforme*quantidade*de*repetições//
+							//**********************************************//
+							for (int ufrolartotal = 1; ufrolartotal <= ufrolartela ; ufrolartotal++)
+							{
+								driver.swipe(ufstartx, ufstarty, ufstartx, ufendy, 3000);
+								Thread.sleep(5000);
+							}
+						 }
+
+						 //**********************************************//
+						 //******Criar*as*listas*de*valores*da*tela******//
+						 //**********************************************//
+						 List <WebElement> uf = driver.findElementsByXPath("//android.widget.ListView[@resource-id='android:id/select_dialog_listview']/android.widget.TextView");
+						 ArrayList<String> uftotal = new ArrayList();				 
+						 
+						 //**********************************************//
+						 //Verificar*o*tamanho*da*lista*e*incluir*valores//
+						 //**********************************************//
+						 int ufsize = uf.size();		 
+						 for (int ufi  = 0; ufi < ufsize; ufi++) 
+						 { 
+							 String uftipo = uf.get(ufi).getText();
+							 uftotal.add(uftipo);					 
+						 }
+						 
+						 //**********************************************************//
+						 //Seleciona*um*valor*da*lista,*até*acabar*os*valores*da*tela//
+						 //**********************************************************//
+						 for (int ufselecionar  = 0; ufselecionar < uftotal.size(); ufselecionar++) 
+						 { 
+							 driver.findElement(By.xpath("//android.widget.TextView[@text = '"+ uftotal.get(ufselecionar) +"']")).click();
+							 Thread.sleep(5000);
+							 driver.findElement(By.xpath("//android.widget.EditText[@bounds = '[24,601][516,669]']")).click();
+							 Thread.sleep(10000);
+							 System.out.println(anoselecionar+"-"+anototal.get(anoselecionar)+"-"+ufselecionar+"-"+uftotal.get(ufselecionar));								 
+
+							 //**********************************************//
+							 //Se*for*a*primeira*vez*da*tela*não*rolar*a*tela//
+							 //**********************************************//
+							 if (ufrolartela> 0)
+							 {
+							    /*Rolar a tela para baixo*/
+								Dimension ufdimensao = driver.manage().window().getSize();
+								
+								//Esquerda superior, lugar inicial da tela
+								int ufstarty = (int) (ufdimensao.height * 0.80); 
+												
+								//espaço que será percorrido
+								int ufendy = (int) (ufdimensao.height * 0.06);
+										
+								//meio da tela
+								int ufstartx = ufdimensao.width / 2; 
+								
+								 //**********************************************//
+								 //*******comando*swipe*para*rolar*a*tela********//
+								 //**********************************************//
+								for (int ufrolartotal = 1; ufrolartotal <= ufrolartela ;ufrolartotal++)
+								{
+									driver.swipe(ufstartx, ufstarty, ufstartx, ufendy, 3000);
+									Thread.sleep(5000);
+								}
+							 } 
+						  }
+					  }				 
+					
+					driver.findElement(By.xpath("//android.widget.Button[@text= 'Cancelar']")).click();				 
+				    ////////////////////////////////////////////////////////////////////////////////
+				    ////////////////////////////////////////////////////////////////////////////////
+
+				 driver.findElement(By.xpath("//android.widget.EditText[@bounds = '[24,493][516,561]']")).click();
+				 Thread.sleep(10000);				 
+				 
 				 //**********************************************//
 				 //Se*for*a*primeira*vez*da*tela*não*rolar*a*tela//
 				 //**********************************************//
-				 if (rolartela> 0)
+				 if (anorolartela> 0)
 				 {
 				    /*Rolar a tela para baixo*/
-					Dimension dimensao = driver.manage().window().getSize();
+					Dimension anodimensao = driver.manage().window().getSize();
 					
 					//Esquerda superior, lugar inicial da tela
-					int starty = (int) (dimensao.height * 0.80); 
+					int anostarty = (int) (anodimensao.height * 0.80); 
 									
 					//espaço que será percorrido
-					int endy = (int) (dimensao.height * 0.06);
+					int anoendy = (int) (anodimensao.height * 0.06);
 							
 					//meio da tela
-					int startx = dimensao.width / 2; 
+					int anostartx = anodimensao.width / 2; 
 					
 					 //**********************************************//
 					 //*******comando*swipe*para*rolar*a*tela********//
 					 //**********************************************//
-					for (int rolartotal = 1; rolartotal <= rolartela ;rolartotal++)
+					for (int anorolartotal = 1; anorolartotal <= anorolartela ;anorolartotal++)
 					{
-						driver.swipe(startx, starty, startx, endy, 3000);
+						driver.swipe(anostartx, anostarty, anostartx, anoendy, 3000);
 						Thread.sleep(5000);
 					}
 				 } 
-			  }
+			  }	 
 		  }
-		  System.out.println("Codigo Finalizado");
+		
+		//Botão Cancelar//
+		driver.findElement(By.xpath("//android.widget.Button[@text= 'Cancelar']")).click(); 
+		 
+		System.out.println("Codigo Finalizado");
 		
 //		/*Clicar no botão iniciar de buscar*/
 //		driver.findElement(By.xpath("//android.widget.Button[@bounds = '[24,684][516,756]']")).click();
@@ -186,7 +286,9 @@ public class propriedadesaplicacao {
 //		driver.findElement(By.xpath("//android.widget.Button[@bounds = '[0,36][69,120]']")).click();
 //		Thread.sleep(10000);
 //		
-		
+
+			
 	}
+
 	
 }
